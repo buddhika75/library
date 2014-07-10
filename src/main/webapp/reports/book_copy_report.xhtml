@@ -17,9 +17,21 @@
 
                     <h:form >
 
-                        <p:selectOneMenu value="#{transactionController.book}" >
-                            <f:selectItems value="#{bookController.items}" var="s" itemLabel="#{s.name}" itemValue="#{s}" ></f:selectItems>
-                        </p:selectOneMenu>
+                        <p:autoComplete value="#{transactionController.bookCopy}"
+                                        completeMethod="#{bookCopyController.completeBookCopies}"
+                                        var="bc"
+                                        itemLabel="#{bc.book.name}"
+                                        itemValue="#{bc}">
+                            <p:column headerText="Book No">
+                                <p:outputLabel value="#{bc.name}" ></p:outputLabel>
+                            </p:column>
+                            <p:column headerText="Book">
+                                <p:outputLabel value="#{bc.book.name}" ></p:outputLabel>
+                            </p:column>
+                            <p:column headerText="Author">
+                                <p:outputLabel value="#{bc.book.author.name}" ></p:outputLabel>
+                            </p:column>
+                        </p:autoComplete>
                         <p:commandButton value="List" action="#{transactionController.fillBookcopyIssued()}" ajax="false" ></p:commandButton>
                         <p:dataTable id="tbl" value="#{transactionController.issuedBooks}" var="ib" 
                                      rowKey="#{ib.id}">
@@ -34,10 +46,19 @@
                                 <h:outputLabel value="#{ib.staff.name}" ></h:outputLabel>
                             </p:column>
                             <p:column headerText="Issued Date" >
-                                <h:outputLabel value="#{ib.issuedDate}" ></h:outputLabel>
+                                <h:outputLabel value="#{ib.issuedDate}" >
+                                    <f:convertDateTime pattern="dd MMMM yyyy" ></f:convertDateTime>
+                                </h:outputLabel>
                             </p:column>
                             <p:column headerText="Due Date" >
-                                <h:outputLabel value="#{ib.dueDate}" ></h:outputLabel>
+                                <h:outputLabel value="#{ib.dueDate}" >
+                                    <f:convertDateTime pattern="dd MMMM yyyy" ></f:convertDateTime>
+                                </h:outputLabel>
+                            </p:column>
+                             <p:column headerText="Returned Date" >
+                                <h:outputLabel value="#{ib.returnedDate}" >
+                                    <f:convertDateTime pattern="dd MMMM yyyy" ></f:convertDateTime>
+                                </h:outputLabel>
                             </p:column>
 
                         </p:dataTable>
