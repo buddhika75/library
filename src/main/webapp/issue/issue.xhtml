@@ -1,0 +1,54 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+    <body>
+
+        <ui:composition template="./../template.xhtml">
+            <ui:define name="body">
+                <div align="center">
+                    <div align="center" style="width: 30%; height: 100%">
+                        <p:panel header="Issue Books" >
+                            <h:form >
+                                <p:panelGrid columns="2">
+                                    <p:outputLabel value="Book Copy" ></p:outputLabel>
+                                    <p:autoComplete value="#{transactionController.bookCopy}"
+                                                    completeMethod="#{bookCopyController.completeBookCopies}"
+                                                    var="bc"
+                                                    itemLabel="#{bc.book.name}"
+                                                    itemValue="#{bc}">
+                                        <p:column headerText="Book No">
+                                            <p:outputLabel value="#{bc.name}" ></p:outputLabel>
+                                        </p:column>
+                                        <p:column headerText="Book">
+                                            <p:outputLabel value="#{bc.book.name}" ></p:outputLabel>
+                                        </p:column>
+                                        <p:column headerText="Author">
+                                            <p:outputLabel value="#{bc.book.author.name}" ></p:outputLabel>
+                                        </p:column>
+                                    </p:autoComplete>
+                                    <p:outputLabel value="Staff" ></p:outputLabel>
+                                    <p:selectOneMenu value="#{transactionController.staff}" >
+                                        <f:selectItems value="#{staffController.items}" var="s" itemLabel="#{s.name}" itemValue="#{s}" ></f:selectItems>
+                                    </p:selectOneMenu>
+                                    <p:outputLabel value="Issued Date" ></p:outputLabel>
+                                    <p:calendar value="#{transactionController.issueDate}" >
+                                    </p:calendar>
+                                    <p:outputLabel value="Return Date" ></p:outputLabel>
+                                    <p:calendar value="#{transactionController.dueDate}" ></p:calendar>
+                                    <p:commandButton ajax="false" action="#{transactionController.issue()}" value="Issue"></p:commandButton>
+                                </p:panelGrid>
+                            </h:form>
+                        </p:panel>
+                    </div>
+                </div>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

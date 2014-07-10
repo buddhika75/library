@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="BookCreateDlg" widgetVar="BookCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateBookTitle}">
+            <h:form id="BookCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{bookController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateBookLabel_code}" for="code" />
+                        <p:inputText id="code" value="#{bookController.selected.code}" title="#{bundle.CreateBookTitle_code}" />
+                        <p:outputLabel value="#{bundle.CreateBookLabel_name}" for="name" />
+                        <p:inputText id="name" value="#{bookController.selected.name}" title="#{bundle.CreateBookTitle_name}" />
+                        <p:outputLabel value="#{bundle.CreateBookLabel_author}" for="author" />
+                        <p:selectOneMenu id="author" value="#{bookController.selected.author}" >
+                            <f:selectItems value="#{authorController.itemsAvailableSelectOne}"
+                                           var="authorItem"
+                                           itemValue="#{authorItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateBookLabel_publisher}" for="publisher" />
+                        <p:selectOneMenu id="publisher" value="#{bookController.selected.publisher}" >
+                            <f:selectItems value="#{publisherController.itemsAvailableSelectOne}"
+                                           var="publisherItem"
+                                           itemValue="#{publisherItem}"/>
+                        </p:selectOneMenu>
+                        
+                        <p:outputLabel value="#{bundle.CreateBookLabel_language}" for="language" />
+                        <p:selectOneMenu id="language" value="#{bookController.selected.language}" >
+                            <f:selectItem itemValue="Sinhala" itemLabel="Sinhala" ></f:selectItem>
+                            <f:selectItem itemValue="Tamil"  itemLabel="Tamil" ></f:selectItem>
+                            <f:selectItem itemValue="English"  itemLabel="English" ></f:selectItem>
+                            <f:selectItem itemValue="Other" itemLabel="Other"  ></f:selectItem>
+                        </p:selectOneMenu>
+                        
+                        <p:outputLabel value="#{bundle.CreateBookLabel_isbnNumber}" for="isbnNumber" />
+                        <p:inputText id="isbnNumber" value="#{bookController.selected.isbnNumber}" title="#{bundle.CreateBookTitle_isbnNumber}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{bookController.create}" value="#{bundle.Save}" update="display,:BookListForm:datalist,:growl" oncomplete="handleSubmit(args,'BookCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="BookCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

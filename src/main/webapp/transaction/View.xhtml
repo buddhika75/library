@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="TransactionViewDlg" widgetVar="TransactionViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewTransactionTitle}">
+            <h:form id="TransactionViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{transactionController.selected != null}">
+                        <h:outputText value="#{bundle.ViewTransactionLabel_transactionNo}"/>
+                        <h:outputText value="#{transactionController.selected.transactionNo}" title="#{bundle.ViewTransactionTitle_transactionNo}"/>
+                        
+                        <h:outputText value="#{bundle.ViewTransactionLabel_bookCopy}"/>
+                        <h:outputText value="#{transactionController.selected.bookCopy}" title="#{bundle.ViewTransactionTitle_bookCopy}"/>
+                        <h:outputText value="#{bundle.ViewTransactionLabel_staff}"/>
+                        <h:outputText value="#{transactionController.selected.staff}" title="#{bundle.ViewTransactionTitle_staff}"/>
+                        <h:outputText value="#{bundle.ViewTransactionLabel_issuedDate}"/>
+                        <h:outputText value="#{transactionController.selected.issuedDate}" title="#{bundle.ViewTransactionTitle_issuedDate}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewTransactionLabel_dueDate}"/>
+                        <h:outputText value="#{transactionController.selected.dueDate}" title="#{bundle.ViewTransactionTitle_dueDate}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewTransactionLabel_returnedDate}"/>
+                        <h:outputText value="#{transactionController.selected.returnedDate}" title="#{bundle.ViewTransactionTitle_returnedDate}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewTransactionLabel_returnComments}"/>
+                        <h:outputText value="#{transactionController.selected.returnComments}" title="#{bundle.ViewTransactionTitle_returnComments}"/>
+                        
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="TransactionViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="TransactionEditDlg" widgetVar="TransactionEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditTransactionTitle}">
+            <h:form id="TransactionEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{transactionController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditTransactionLabel_transactionNo}" for="transactionNo" />
+                        <p:inputText id="transactionNo" value="#{transactionController.selected.transactionNo}" title="#{bundle.EditTransactionTitle_transactionNo}" />
+                        
+                        <p:outputLabel value="#{bundle.EditTransactionLabel_bookCopy}" for="bookCopy" />
+                        <p:selectOneMenu id="bookCopy" value="#{transactionController.selected.bookCopy}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{bookCopyController.itemsAvailableSelectOne}"
+                                           var="bookCopyItem"
+                                           itemValue="#{bookCopyItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditTransactionLabel_staff}" for="staff" />
+                        <p:selectOneMenu id="staff" value="#{transactionController.selected.staff}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{staffController.itemsAvailableSelectOne}"
+                                           var="staffItem"
+                                           itemValue="#{staffItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditTransactionLabel_issuedDate}" for="issuedDate" />
+                        <p:calendar id="issuedDate" pattern="MM/dd/yyyy HH:mm:ss" value="#{transactionController.selected.issuedDate}" title="#{bundle.EditTransactionTitle_issuedDate}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditTransactionLabel_dueDate}" for="dueDate" />
+                        <p:calendar id="dueDate" pattern="MM/dd/yyyy" value="#{transactionController.selected.dueDate}" title="#{bundle.EditTransactionTitle_dueDate}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditTransactionLabel_returnedDate}" for="returnedDate" />
+                        <p:calendar id="returnedDate" pattern="MM/dd/yyyy" value="#{transactionController.selected.returnedDate}" title="#{bundle.EditTransactionTitle_returnedDate}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditTransactionLabel_returnComments}" for="returnComments" />
+                        <p:inputTextarea rows="4" cols="30" id="returnComments" value="#{transactionController.selected.returnComments}" title="#{bundle.EditTransactionTitle_returnComments}" />
+                        
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{transactionController.update}" value="#{bundle.Save}" update="display,:TransactionListForm:datalist,:growl" oncomplete="handleSubmit(args, 'TransactionEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="TransactionEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

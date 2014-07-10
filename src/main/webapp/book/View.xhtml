@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="BookViewDlg" widgetVar="BookViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewBookTitle}">
+            <h:form id="BookViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{bookController.selected != null}">
+                        <h:outputText value="#{bundle.ViewBookLabel_code}"/>
+                        <h:outputText value="#{bookController.selected.code}" title="#{bundle.ViewBookTitle_code}"/>
+                        <h:outputText value="#{bundle.ViewBookLabel_name}"/>
+                        <h:outputText value="#{bookController.selected.name}" title="#{bundle.ViewBookTitle_name}"/>
+                        <h:outputText value="#{bundle.ViewBookLabel_author}"/>
+                        <h:outputText value="#{bookController.selected.author}" title="#{bundle.ViewBookTitle_author}"/>
+                        <h:outputText value="#{bundle.ViewBookLabel_publisher}"/>
+                        <h:outputText value="#{bookController.selected.publisher}" title="#{bundle.ViewBookTitle_publisher}"/>
+                        <h:outputText value="#{bundle.ViewBookLabel_language}"/>
+                        <h:outputText value="#{bookController.selected.language}" title="#{bundle.ViewBookTitle_language}"/>
+                        <h:outputText value="#{bundle.ViewBookLabel_isbnNumber}"/>
+                        <h:outputText value="#{bookController.selected.isbnNumber}" title="#{bundle.ViewBookTitle_isbnNumber}"/>
+                        
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="BookViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>
