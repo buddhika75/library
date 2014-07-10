@@ -34,10 +34,17 @@
                                 <h:outputLabel value="#{ib.staff.name}" ></h:outputLabel>
                             </p:column>
                             <p:column headerText="Issued Date" >
-                                <h:outputLabel value="#{ib.issuedDate}" ></h:outputLabel>
+                                <h:outputLabel value="#{ib.issuedDate}" >
+                                <f:convertDateTime pattern="dd MMMM yyyy" ></f:convertDateTime></h:outputLabel>
                             </p:column>
                             <p:column headerText="Due Date" >
-                                <h:outputLabel value="#{ib.dueDate}" ></h:outputLabel>
+                                <h:outputLabel value="#{ib.dueDate}" >
+                                <f:convertDateTime pattern="dd MMMM yyyy" ></f:convertDateTime></h:outputLabel>
+                            </p:column>
+                            <p:column headerText="Returned Date" >
+                                <h:outputLabel value="#{ib.returnedDate}" >
+                                    <f:convertDateTime pattern="dd MMMM yyyy" ></f:convertDateTime>
+                                </h:outputLabel>
                             </p:column>
 
                         </p:dataTable>
