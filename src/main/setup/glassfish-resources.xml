@@ -10,5 +10,5 @@
         <property name="URL" value="jdbc:derby://localhost:1527/Library"/>
         <property name="driverClass" value="org.apache.derby.jdbc.ClientDriver"/>
     </jdbc-connection-pool>
-    <jdbc-resource enabled="true" jndi-name="dsLib" object-type="user" pool-name="derby_net_Library_LibraryPool"/>
+    <jdbc-resource enabled="true" jndi-name="dsLibrary" object-type="user" pool-name="derby_net_Library_LibraryPool"/>
 </resources>

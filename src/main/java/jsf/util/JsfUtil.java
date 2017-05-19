@@ -62,7 +62,6 @@ public class JsfUtil {
     }
 
     public static enum PersistAction {
-
         CREATE,
         DELETE,
         UPDATE
